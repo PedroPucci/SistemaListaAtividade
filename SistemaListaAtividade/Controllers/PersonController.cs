@@ -48,7 +48,7 @@ namespace SistemaListaAtividade.Controllers
         [HttpGet("all")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Person>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetAllPersons()
+        public async Task<IActionResult> GetAllPerson()
         {
             try
             {
