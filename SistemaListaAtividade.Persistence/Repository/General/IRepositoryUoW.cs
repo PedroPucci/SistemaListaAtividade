@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
+using SistemaListaAtividade.Persistence.Repository.Interfaces;
 
-namespace SistemaListaAtividade.Persistence.Repository.Interfaces
+namespace SistemaListaAtividade.Persistence.Repository.General
 {
     public interface IRepositoryUoW
     {

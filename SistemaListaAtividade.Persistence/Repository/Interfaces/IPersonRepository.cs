@@ -7,5 +7,6 @@ namespace SistemaListaAtividade.Persistence.Repository.Interfaces
         Task<Person> AddPersonAsync(Person person);
         Person UpdatePerson(Person person);
         Task<List<Person>> GetAllPersonsAsync();
+        Task<Person> GetPersonByNameAsync(string? personName);
     }
 }

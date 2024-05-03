@@ -1,6 +1,6 @@
 ﻿using SistemaListaAtividade.Application.Services.Interfaces;
 using SistemaListaAtividade.Domain.Entities;
-using SistemaListaAtividade.Persistence.Repository.Interfaces;
+using SistemaListaAtividade.Persistence.Repository.General;
 
 namespace SistemaListaAtividade.Application.Services
 {

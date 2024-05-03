@@ -5,7 +5,7 @@ using SistemaListaAtividade.Domain.Entities;
 namespace SistemaListaAtividade.Controllers
 {
     [ApiController]
-    [Route("api/v1/user")]
+    [Route("api/v1/person")]
     public class PersonController : Controller
     {
         private readonly IUnitOfWorkService _serviceUoW;
@@ -15,7 +15,7 @@ namespace SistemaListaAtividade.Controllers
             _serviceUoW = unitOfWorkService;
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public async Task<IActionResult> AddPerson([FromBody] Person person)
         {
             var result = await _serviceUoW.PersonService.AddPerson(person);

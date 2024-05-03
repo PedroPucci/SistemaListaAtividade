@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using SistemaListaAtividade.Application.Services.General;
+using SistemaListaAtividade.Application.Services.Interfaces;
 using SistemaListaAtividade.Persistence.Connections;
+using SistemaListaAtividade.Persistence.Repository.General;
 
 namespace SistemaListaAtividade.Extensions
 {
@@ -31,7 +34,10 @@ namespace SistemaListaAtividade.Extensions
                     policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:4200");
                 });
             });
-            
+
+            services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
+            services.AddScoped<IRepositoryUoW, RepositoryUoW>();
+
             return services;
         }
     }

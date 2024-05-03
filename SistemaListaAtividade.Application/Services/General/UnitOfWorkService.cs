@@ -1,7 +1,7 @@
 ﻿using SistemaListaAtividade.Application.Services.Interfaces;
-using SistemaListaAtividade.Persistence.Repository.Interfaces;
+using SistemaListaAtividade.Persistence.Repository.General;
 
-namespace SistemaListaAtividade.Application.Services
+namespace SistemaListaAtividade.Application.Services.General
 {
     public class UnitOfWorkService : IUnitOfWorkService
     {
@@ -36,6 +36,6 @@ namespace SistemaListaAtividade.Application.Services
                 }
                 return practiceService;
             }
-        }        
+        }
     }
 }
