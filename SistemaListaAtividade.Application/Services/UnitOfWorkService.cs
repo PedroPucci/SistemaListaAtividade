@@ -1,4 +1,5 @@
 ﻿using SistemaListaAtividade.Application.Services.Interfaces;
+using SistemaListaAtividade.Persistence.Repository.Interfaces;
 
 namespace SistemaListaAtividade.Application.Services
 {

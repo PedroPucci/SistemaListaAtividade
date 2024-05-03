@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SistemaListaAtividade.Application\SistemaListaAtividade.Application.csproj" />
     <ProjectReference Include="..\SistemaListaAtividade.Persistence\SistemaListaAtividade.Persistence.csproj" />
   </ItemGroup>
 

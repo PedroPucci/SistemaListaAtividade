@@ -2,7 +2,7 @@
 
 namespace SistemaListaAtividade.Application.Services.Interfaces
 {
-    public interface IPersonService
+    public interface IPracticeService
     {
         Task<Practice> AddPractice(Practice practice);
         Task<Practice> UpdatePractice(Practice practice);

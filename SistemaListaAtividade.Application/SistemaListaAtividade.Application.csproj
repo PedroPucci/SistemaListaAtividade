@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SistemaListaAtividade.Domain\SistemaListaAtividade.Domain.csproj" />
+    <ProjectReference Include="..\SistemaListaAtividade.Persistence\SistemaListaAtividade.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

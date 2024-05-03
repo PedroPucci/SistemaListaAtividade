@@ -23,6 +23,6 @@ namespace SistemaListaAtividade.Persistence.Connections
 
 
         public DbSet<Person> Person { get; set; }
-        public DbSet<Pratice> Pratice { get; set; }
+        public DbSet<Practice> Practice { get; set; }
     }
 }
