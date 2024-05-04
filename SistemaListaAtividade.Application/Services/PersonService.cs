@@ -29,7 +29,7 @@ namespace SistemaListaAtividade.Application.Services
             catch (Exception ex)
             {
                 transaction.Rollback();
-                throw new InvalidOperationException("Unexpected error " + ex + "!");
+                throw new InvalidOperationException("An error occurred while adding the Person! " + ex + "");
             }
             finally
             {
@@ -135,7 +135,7 @@ namespace SistemaListaAtividade.Application.Services
             catch (Exception ex)
             {
                 transaction.Rollback();
-                throw new InvalidOperationException("There was an error loading persons! " + ex + "");
+                throw new InvalidOperationException("There was an error loading person! " + ex + "");
             }
             finally
             {

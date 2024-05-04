@@ -28,7 +28,7 @@ namespace SistemaListaAtividade.Application.Services
             catch (Exception ex)
             {
                 transaction.Rollback();
-                throw new InvalidOperationException("Unexpected error " + ex + "!");
+                throw new InvalidOperationException("An error occurred while adding the Practice! " + ex + "");
             }
             finally
             {
@@ -59,7 +59,7 @@ namespace SistemaListaAtividade.Application.Services
             catch (Exception ex)
             {
                 transaction.Rollback();
-                throw new InvalidOperationException("Unexpected error " + ex + "!");
+                throw new InvalidOperationException("An error occurred while updating the Practice! " + ex + "");
             }
             finally
             {
@@ -84,7 +84,7 @@ namespace SistemaListaAtividade.Application.Services
             catch (Exception ex)
             {
                 transaction.Rollback();
-                throw new InvalidOperationException("Unexpected error " + ex + "!");
+                throw new InvalidOperationException("An error occurred while removing the Practice! " + ex + "");
             }
             finally
             {
@@ -104,7 +104,7 @@ namespace SistemaListaAtividade.Application.Services
             catch (Exception ex)
             {
                 transaction.Rollback();
-                throw new InvalidOperationException("Unexpected error " + ex + "!");
+                throw new InvalidOperationException("An error occurred while loading the Practices! " + ex + "");
             }
             finally
             {
@@ -131,7 +131,7 @@ namespace SistemaListaAtividade.Application.Services
             catch (Exception ex)
             {
                 transaction.Rollback();
-                throw new InvalidOperationException("Unexpected error " + ex + "!");
+                throw new InvalidOperationException("An error occurred while loading the Practice! " + ex + "");
             }
             finally
             {
