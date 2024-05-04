@@ -6,7 +6,9 @@ namespace SistemaListaAtividade.Persistence.Repository.Interfaces
     {
         Task<Person> AddPersonAsync(Person person);
         Person UpdatePerson(Person person);
+        Person DeletePerson(Person personToDelete);
         Task<List<Person>> GetAllPersonsAsync();
         Task<Person> GetPersonByNameAsync(string? personName);
+        Task<Person> GetPersonByIdAsync(int? id);
     }
 }

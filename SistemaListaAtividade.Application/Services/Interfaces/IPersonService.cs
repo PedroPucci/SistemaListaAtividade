@@ -7,5 +7,6 @@ namespace SistemaListaAtividade.Application.Services.Interfaces
         Task<Person> AddPerson(Person person);
         Task<Person> UpdatePerson(Person person);
         Task<List<Person>> GetAllPersons();
+        Task<Person> GetAllPersonByFirstName(string name);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using SistemaListaAtividade.Domain.Entities;
 using SistemaListaAtividade.Persistence.Connections;
 using SistemaListaAtividade.Persistence.Repository.Interfaces;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace SistemaListaAtividade.Persistence.Repository
 {
@@ -20,25 +20,61 @@ namespace SistemaListaAtividade.Persistence.Repository
             return result.Entity;
         }
 
-        public async Task<List<Person>> GetAllPersonsAsync()
-        {
-            return await _context.Person.OrderBy(person => person.FirstName).Select(person => new Person
-            {                
-                FirstName = person.FirstName,
-                LastName = person.LastName,
-                Email = person.Email
-            }).ToListAsync();
-        }
-
         public Person UpdatePerson(Person person)
         {
             var response = _context.Person.Update(person);
             return response.Entity;
         }
 
-        public async Task<Person> GetPersonByNameAsync(string name)
+        //public async Task DeletePersonAsync(int personId)
+        //{
+        //    var personToDelete = await _context.Person.FindAsync(personId);
+
+        //    _context.Person.Remove(personToDelete);
+        //    await _context.SaveChangesAsync();
+        //}
+
+        //public async Task<Person> DeletePersonAsync(int personId)
+        //{
+        //    var personToDelete = await _context.Person.FirstOrDefaultAsync(person => person.Id == personId);
+
+        //    if (personToDelete != null)
+        //    {
+        //        _context.Person.Remove(personToDelete);
+        //        await _context.SaveChangesAsync();
+        //    }
+
+        //    return personToDelete;
+        //}
+
+        public Person DeletePerson(Person personToDelete)
+        {
+            var response = _context.Person.Remove(personToDelete);
+            return response.Entity;
+        }
+
+        public async Task<List<Person>> GetAllPersonsAsync()
+        {
+            return await _context.Person
+                .OrderBy(person => person.FirstName)
+                .Select(person => new Person
+            {
+                FullName = person.FirstName,
+                ModificationDate = DateTime.Now,                
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                Email = person.Email
+            }).ToListAsync();
+        }        
+
+        public async Task<Person> GetPersonByNameAsync(string? name)
         {
             return await _context.Person.FirstOrDefaultAsync(person => person.FirstName == name);
+        }
+
+        public async Task<Person> GetPersonByIdAsync(int? id)
+        {
+            return await _context.Person.FirstOrDefaultAsync(person => person.Id == id);
         }
     }
 }

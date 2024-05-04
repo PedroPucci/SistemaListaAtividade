@@ -27,5 +27,16 @@ namespace SistemaListaAtividade.Application.Services
         {
             throw new NotImplementedException();
         }
+
+        public async Task DeletePractice(int practiceId)
+        {
+            var practiceToDelete = await _repositoryUoW.PracticeRepository.GetPracticeByIdAsync(practiceId);
+
+            if (practiceToDelete == null)
+                throw new ArgumentException("Practice not found with the given ID.");
+
+            _repositoryUoW.PracticeRepository.DeletePractice(practiceToDelete);
+            await _repositoryUoW.SaveAsync();
+        }
     }
 }

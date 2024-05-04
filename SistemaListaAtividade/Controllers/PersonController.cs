@@ -45,6 +45,36 @@ namespace SistemaListaAtividade.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> DeletePerson(int id)
+        {
+            try
+            {
+                await _serviceUoW.PersonService.DeletePersonAsync(id);
+                return Ok(new
+                {
+                    mensagem = $"Person deleted successfully."
+                });
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(new
+                {
+                    mensagem = ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "An error occurred while deleting the Person! " + ex.Message
+                });
+            }
+        }
+
         [HttpGet("all")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Person>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -53,6 +83,25 @@ namespace SistemaListaAtividade.Controllers
             try
             {
                 var persons = await _serviceUoW.PersonService.GetAllPersons();
+                return Ok(persons);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "There was an error loading persons! " + ex + ""
+                });
+            }
+        }
+
+        [HttpGet("{name}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Person>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetAllPersonByFirstName(string name)
+        {
+            try
+            {
+                var persons = await _serviceUoW.PersonService.GetAllPersonByFirstName(name);
                 return Ok(persons);
             }
             catch (Exception ex)
