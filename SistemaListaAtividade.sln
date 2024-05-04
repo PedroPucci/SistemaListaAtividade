@@ -3,23 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaListaAtividade", "SistemaListaAtividade\SistemaListaAtividade.csproj", "{9315736C-6F19-44AD-A8E6-593345D61B25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemaListaAtividade", "SistemaListaAtividade\SistemaListaAtividade.csproj", "{9315736C-6F19-44AD-A8E6-593345D61B25}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0CA06F43-B497-4E63-8A7C-11DA2D213F04} = {0CA06F43-B497-4E63-8A7C-11DA2D213F04}
 		{66EC7467-CA9C-4053-8F7C-2A6A99FF4120} = {66EC7467-CA9C-4053-8F7C-2A6A99FF4120}
 		{FE3818BE-977D-4251-AD3B-593E1AD43842} = {FE3818BE-977D-4251-AD3B-593E1AD43842}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaListaAtividade.Application", "SistemaListaAtividade.Application\SistemaListaAtividade.Application.csproj", "{0CA06F43-B497-4E63-8A7C-11DA2D213F04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemaListaAtividade.Application", "SistemaListaAtividade.Application\SistemaListaAtividade.Application.csproj", "{0CA06F43-B497-4E63-8A7C-11DA2D213F04}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FE3818BE-977D-4251-AD3B-593E1AD43842} = {FE3818BE-977D-4251-AD3B-593E1AD43842}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaListaAtividade.Domain", "SistemaListaAtividade.Domain\SistemaListaAtividade.Domain.csproj", "{FE3818BE-977D-4251-AD3B-593E1AD43842}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemaListaAtividade.Domain", "SistemaListaAtividade.Domain\SistemaListaAtividade.Domain.csproj", "{FE3818BE-977D-4251-AD3B-593E1AD43842}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaListaAtividade.Persistence", "SistemaListaAtividade.Persistence\SistemaListaAtividade.Persistence.csproj", "{66EC7467-CA9C-4053-8F7C-2A6A99FF4120}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemaListaAtividade.Persistence", "SistemaListaAtividade.Persistence\SistemaListaAtividade.Persistence.csproj", "{66EC7467-CA9C-4053-8F7C-2A6A99FF4120}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FE3818BE-977D-4251-AD3B-593E1AD43842} = {FE3818BE-977D-4251-AD3B-593E1AD43842}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaListaAtividade.Tests", "SistemaListaAtividade.Tests\SistemaListaAtividade.Tests.csproj", "{FF0BE2A3-1A21-4909-A529-4647471D5424}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0CA06F43-B497-4E63-8A7C-11DA2D213F04} = {0CA06F43-B497-4E63-8A7C-11DA2D213F04}
 	EndProjectSection
 EndProject
 Global
@@ -44,6 +49,10 @@ Global
 		{66EC7467-CA9C-4053-8F7C-2A6A99FF4120}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66EC7467-CA9C-4053-8F7C-2A6A99FF4120}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66EC7467-CA9C-4053-8F7C-2A6A99FF4120}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF0BE2A3-1A21-4909-A529-4647471D5424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF0BE2A3-1A21-4909-A529-4647471D5424}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF0BE2A3-1A21-4909-A529-4647471D5424}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF0BE2A3-1A21-4909-A529-4647471D5424}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
