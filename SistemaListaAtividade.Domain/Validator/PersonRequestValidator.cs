@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
 using SistemaListaAtividade.Domain.Entities;
+using SistemaListaAtividade.Domain.Enums.Errors;
+using SistemaListaAtividade.Domain.Helpers;
 
 namespace SistemaListaAtividade.Domain.Validator
 {
@@ -9,11 +11,11 @@ namespace SistemaListaAtividade.Domain.Validator
         {
             RuleFor(p => p.FirstName)
                 .NotEmpty()
-                .WithMessage("'FirstName' can not be null or empty!");
+                .WithMessage(PersonErrors.Person_Error_FirstNameCanNotBeNullOrEmpty.Description());
 
             RuleFor(p => p.Email)
                 .NotEmpty()
-                .WithMessage("'Email' can not be null or empty!");
+                .WithMessage(PersonErrors.Person_Error_EmailCanNotBeNullOrEmpty.Description());
         }
     }
 }
