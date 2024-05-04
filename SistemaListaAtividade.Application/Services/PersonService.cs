@@ -1,5 +1,6 @@
 ﻿using SistemaListaAtividade.Application.Services.Interfaces;
 using SistemaListaAtividade.Domain.Entities;
+using SistemaListaAtividade.Domain.Entities.Dto;
 using SistemaListaAtividade.Persistence.Repository.General;
 
 namespace SistemaListaAtividade.Application.Services
@@ -36,19 +37,19 @@ namespace SistemaListaAtividade.Application.Services
             }
         }
 
-        public async Task<Person> UpdatePerson(Person person)
+        public async Task<Person> UpdatePerson(PersonDto personDto)
         {
             using var transaction = _repositoryUoW.BeginTransaction();
             try
             {
-                var personName = person.FirstName;
+                var personName = personDto.FirstName;
 
                 Person personByName = await _repositoryUoW.PersonRepository.GetPersonByNameAsync(personName);
 
                 if (personName == null)
                     throw new InvalidOperationException("Person does not found!");
 
-                personByName.Email = person.Email;
+                personByName.Email = personDto.Email;
                 personByName.ModificationDate = DateTime.UtcNow;
 
                 var result = _repositoryUoW.PersonRepository.UpdatePerson(personByName);

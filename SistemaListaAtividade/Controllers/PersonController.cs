@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SistemaListaAtividade.Application.Services.Interfaces;
 using SistemaListaAtividade.Domain.Entities;
+using SistemaListaAtividade.Domain.Entities.Dto;
 
 namespace SistemaListaAtividade.Controllers
 {
@@ -26,11 +27,11 @@ namespace SistemaListaAtividade.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> UpdatePerson([FromBody] Person person)
+        public async Task<IActionResult> UpdatePerson([FromBody] PersonDto personDto)
         {
             try
             {
-                Person updatePerson = await _serviceUoW.PersonService.UpdatePerson(person);
+                Person updatePerson = await _serviceUoW.PersonService.UpdatePerson(personDto);
                 return Ok(new
                 {
                     mensagem = $"Person registration updated successfully."

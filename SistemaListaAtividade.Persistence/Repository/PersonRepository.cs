@@ -26,29 +26,9 @@ namespace SistemaListaAtividade.Persistence.Repository
             return response.Entity;
         }
 
-        //public async Task DeletePersonAsync(int personId)
-        //{
-        //    var personToDelete = await _context.Person.FindAsync(personId);
-
-        //    _context.Person.Remove(personToDelete);
-        //    await _context.SaveChangesAsync();
-        //}
-
-        //public async Task<Person> DeletePersonAsync(int personId)
-        //{
-        //    var personToDelete = await _context.Person.FirstOrDefaultAsync(person => person.Id == personId);
-
-        //    if (personToDelete != null)
-        //    {
-        //        _context.Person.Remove(personToDelete);
-        //        await _context.SaveChangesAsync();
-        //    }
-
-        //    return personToDelete;
-        //}
-
         public Person DeletePerson(Person personToDelete)
         {
+            _context.Practice.RemoveRange(personToDelete.Practices);
             var response = _context.Person.Remove(personToDelete);
             return response.Entity;
         }
@@ -59,8 +39,7 @@ namespace SistemaListaAtividade.Persistence.Repository
                 .OrderBy(person => person.FirstName)
                 .Select(person => new Person
             {
-                FullName = person.FirstName,
-                ModificationDate = DateTime.Now,                
+                FullName = person.FullName,                
                 FirstName = person.FirstName,
                 LastName = person.LastName,
                 Email = person.Email
@@ -69,12 +48,16 @@ namespace SistemaListaAtividade.Persistence.Repository
 
         public async Task<Person> GetPersonByNameAsync(string? name)
         {
-            return await _context.Person.FirstOrDefaultAsync(person => person.FirstName == name);
+            return await _context.Person
+                .Include(person => person.Practices)
+                .FirstOrDefaultAsync(person => person.FirstName == name);
         }
 
         public async Task<Person> GetPersonByIdAsync(int? id)
         {
-            return await _context.Person.FirstOrDefaultAsync(person => person.Id == id);
+            return await _context.Person
+                .Include(person => person.Practices)
+                .FirstOrDefaultAsync(person => person.Id == id);
         }
     }
 }
