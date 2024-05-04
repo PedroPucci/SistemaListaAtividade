@@ -1,4 +1,4 @@
-﻿namespace SistemaListaAtividade.Application.Services.Interfaces
+﻿namespace SistemaListaAtividade.Application.Services.General
 {
     public interface IUnitOfWorkService
     {

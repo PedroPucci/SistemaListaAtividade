@@ -9,5 +9,6 @@ namespace SistemaListaAtividade.Persistence.Repository.Interfaces
         Practice DeletePractice(Practice practiceToDelete);
         Task<List<Practice>> GetAllPracticesAsync();
         Task<Practice> GetPracticeByIdAsync(int? id);
+        Task<Practice> GetPracticeByNameAsync(string? name);
     }
 }

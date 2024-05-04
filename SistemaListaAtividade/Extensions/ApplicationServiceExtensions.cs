@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using SistemaListaAtividade.Application.Services.General;
-using SistemaListaAtividade.Application.Services.Interfaces;
 using SistemaListaAtividade.Persistence.Connections;
 using SistemaListaAtividade.Persistence.Repository.General;
 

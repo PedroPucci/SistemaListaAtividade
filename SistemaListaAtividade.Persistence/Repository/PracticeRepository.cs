@@ -14,9 +14,10 @@ namespace SistemaListaAtividade.Persistence.Repository
             _context = context;
         }
 
-        public Task<Practice> AddPracticeAsync(Practice practice)
+        public async Task<Practice> AddPracticeAsync(Practice practice)
         {
-            throw new NotImplementedException();
+            var result = await _context.Practice.AddAsync(practice);
+            return result.Entity;
         }
 
         public Practice DeletePractice(Practice practiceToDelete)
@@ -25,19 +26,30 @@ namespace SistemaListaAtividade.Persistence.Repository
             return response.Entity;
         }
 
-        public Task<List<Practice>> GetAllPracticesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
         public Practice UpdatePractice(Practice practice)
         {
-            throw new NotImplementedException();
+            var response = _context.Practice.Update(practice);
+            return response.Entity;
+        }
+
+        public async Task<List<Practice>> GetAllPracticesAsync()
+        {
+            return await _context.Practice
+                .OrderBy(practice => practice.Name)
+                .Select(practice => new Practice
+                {
+                    Name = practice.Name,
+                    Description = practice.Description
+                }).ToListAsync();
         }
 
         public async Task<Practice> GetPracticeByIdAsync(int? id)
         {
             return await _context.Practice.FirstOrDefaultAsync(practice => practice.Id == id);
+        }
+        public async Task<Practice> GetPracticeByNameAsync(string? name)
+        {
+            return await _context.Practice.FirstOrDefaultAsync(practice => practice.Name == name);
         }
     }
 }

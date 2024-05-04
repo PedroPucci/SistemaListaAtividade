@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SistemaListaAtividade.Application.Services.Interfaces;
+using SistemaListaAtividade.Application.Services.General;
 
 namespace SistemaListaAtividade.Controllers
 {

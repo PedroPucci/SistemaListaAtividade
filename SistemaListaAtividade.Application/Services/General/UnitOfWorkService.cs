@@ -1,5 +1,4 @@
-﻿using SistemaListaAtividade.Application.Services.Interfaces;
-using SistemaListaAtividade.Persistence.Repository.General;
+﻿using SistemaListaAtividade.Persistence.Repository.General;
 
 namespace SistemaListaAtividade.Application.Services.General
 {
