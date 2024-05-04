@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Events;
 using SistemaListaAtividade.Extensions;
 using SistemaListaAtividade.Persistence.Connections;
 
@@ -8,6 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
+
+builder.Host.UseSerilog((ctx, lc) => lc
+    .WriteTo.Console(LogEventLevel.Debug)
+    .WriteTo.File("log.txt",
+        LogEventLevel.Warning,
+        rollingInterval: RollingInterval.Day));
 
 var app = builder.Build();
 

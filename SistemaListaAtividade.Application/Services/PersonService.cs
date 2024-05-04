@@ -1,4 +1,5 @@
-﻿using SistemaListaAtividade.Application.Services.Interfaces;
+﻿using Serilog;
+using SistemaListaAtividade.Application.Services.Interfaces;
 using SistemaListaAtividade.Domain.Entities;
 using SistemaListaAtividade.Domain.Entities.Dto;
 using SistemaListaAtividade.Domain.Validator;
@@ -23,7 +24,10 @@ namespace SistemaListaAtividade.Application.Services
                 var isValidPerson = await IsValidPersonRequest(person);
                 
                 if (!isValidPerson.Success)
+                {
+                    Log.Error("Mensagem de erro: Campos invalidos para a entidade Person");
                     return Result<Person>.Error(isValidPerson.Message);
+                }                
 
                 person.ModificationDate = DateTime.UtcNow;
                 var result = await _repositoryUoW.PersonRepository.AddPersonAsync(person);
