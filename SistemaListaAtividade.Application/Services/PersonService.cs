@@ -61,7 +61,7 @@ namespace SistemaListaAtividade.Application.Services
             catch (Exception ex)
             {
                 transaction.Rollback();
-                throw new InvalidOperationException("Unexpected error " + ex + "!");
+                throw new InvalidOperationException("An error occurred while updating the Person! " + ex + "");
             }
             finally
             {
@@ -71,13 +71,27 @@ namespace SistemaListaAtividade.Application.Services
 
         public async Task DeletePersonAsync(int personId)
         {
-            var personToDelete = await _repositoryUoW.PersonRepository.GetPersonByIdAsync(personId);
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                var personToDelete = await _repositoryUoW.PersonRepository.GetPersonByIdAsync(personId);
 
-            if (personToDelete == null)
-                throw new ArgumentException("Person not found with the given ID.");
+                if (personToDelete == null)
+                    throw new ArgumentException("Person not found with the given ID.");
 
-            _repositoryUoW.PersonRepository.DeletePersonAsync(personToDelete);
-            await _repositoryUoW.SaveAsync();
+                _repositoryUoW.PersonRepository.DeletePersonAsync(personToDelete);
+                await _repositoryUoW.SaveAsync();
+                await transaction.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("An error occurred while removing the Person! " + ex + "");
+            }
+            finally
+            {
+                transaction.Dispose();
+            }            
         }
 
         public async Task<List<Person>> GetAllPersons()
@@ -92,7 +106,7 @@ namespace SistemaListaAtividade.Application.Services
             catch (Exception ex)
             {
                 transaction.Rollback();
-                throw new InvalidOperationException("Unexpected error " + ex + "!");
+                throw new InvalidOperationException("There was an error loading persons! " + ex + "");
             }
             finally
             {
@@ -121,7 +135,7 @@ namespace SistemaListaAtividade.Application.Services
             catch (Exception ex)
             {
                 transaction.Rollback();
-                throw new InvalidOperationException("Unexpected error " + ex + "!");
+                throw new InvalidOperationException("There was an error loading persons! " + ex + "");
             }
             finally
             {

@@ -17,6 +17,8 @@ namespace SistemaListaAtividade.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddPerson([FromBody] Person person)
         {
             var result = await _serviceUoW.PersonService.AddPerson(person);
@@ -29,21 +31,8 @@ namespace SistemaListaAtividade.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> UpdatePerson([FromBody] PersonDto personDto)
         {
-            try
-            {
-                Person updatePerson = await _serviceUoW.PersonService.UpdatePerson(personDto);
-                return Ok(new
-                {
-                    mensagem = $"Person registration updated successfully."
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    mensagem = "An error occurred while updating the Person! " + ex + ""
-                });
-            }
+            Person updatePerson = await _serviceUoW.PersonService.UpdatePerson(personDto);
+            return Ok(updatePerson);
         }
 
         [HttpDelete("{id}")]
@@ -52,28 +41,8 @@ namespace SistemaListaAtividade.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> DeletePerson(int id)
         {
-            try
-            {
-                await _serviceUoW.PersonService.DeletePersonAsync(id);
-                return Ok(new
-                {
-                    mensagem = $"Person deleted successfully."
-                });
-            }
-            catch (ArgumentException ex)
-            {
-                return NotFound(new
-                {
-                    mensagem = ex.Message
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    mensagem = "An error occurred while deleting the Person! " + ex.Message
-                });
-            }
+            await _serviceUoW.PersonService.DeletePersonAsync(id);
+            return Ok();
         }
 
         [HttpGet("all")]
@@ -81,37 +50,17 @@ namespace SistemaListaAtividade.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllPerson()
         {
-            try
-            {
-                var persons = await _serviceUoW.PersonService.GetAllPersons();
-                return Ok(persons);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    mensagem = "There was an error loading persons! " + ex + ""
-                });
-            }
+            var persons = await _serviceUoW.PersonService.GetAllPersons();
+            return Ok(persons);
         }
 
-        [HttpGet("{name}")]
+        [HttpGet("{firstName}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Person>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetAllPersonByFirstName(string name)
+        public async Task<IActionResult> GetAllPersonByFirstName(string firstName)
         {
-            try
-            {
-                var persons = await _serviceUoW.PersonService.GetAllPersonByFirstName(name);
-                return Ok(persons);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    mensagem = "There was an error loading persons! " + ex + ""
-                });
-            }
+            var persons = await _serviceUoW.PersonService.GetAllPersonByFirstName(firstName);
+            return Ok(persons);
         }
     }
 }

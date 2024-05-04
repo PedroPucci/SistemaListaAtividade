@@ -28,19 +28,17 @@ namespace SistemaListaAtividade.Persistence.Repository.General
             }
         }
 
-        public IPracticeRepository PracticeRepository => throw new NotImplementedException();
-
-        //public IPracticeRepository PracticeRepository
-        //{
-        //    get
-        //    {
-        //        if (_practiceRepository == null)
-        //        {
-        //            _practiceRepository = new PracticeRepository(_context);
-        //        }
-        //        return _practiceRepository;
-        //    }
-        //}       
+        public IPracticeRepository PracticeRepository
+        {
+            get
+            {
+                if (_practiceRepository == null)
+                {
+                    _practiceRepository = new PracticeRepository(_context);
+                }
+                return _practiceRepository;
+            }
+        }
 
         public async Task SaveAsync()
         {

@@ -8,6 +8,6 @@ namespace SistemaListaAtividade.Application.Services.Interfaces
         Task<Practice> UpdatePractice(Practice practice);
         Task DeletePractice(int practiceId);
         Task<List<Practice>> GetAllPractices();
-        Task<Practice> GetAllPracticeByFirstName(string name);
+        Task<Practice> GetAllPracticeByName(string name);
     }
 }

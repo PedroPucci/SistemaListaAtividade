@@ -12,7 +12,7 @@ using SistemaListaAtividade.Persistence.Connections;
 namespace SistemaListaAtividade.Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240503182440_MigrationInitial")]
+    [Migration("20240504114341_MigrationInitial")]
     partial class MigrationInitial
     {
         /// <inheritdoc />
