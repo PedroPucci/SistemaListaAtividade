@@ -1,6 +1,7 @@
 ﻿using SistemaListaAtividade.Application.Services.Interfaces;
 using SistemaListaAtividade.Domain.Entities;
 using SistemaListaAtividade.Domain.Entities.Dto;
+using SistemaListaAtividade.Domain.Validator;
 using SistemaListaAtividade.Persistence.Repository.General;
 
 namespace SistemaListaAtividade.Application.Services
@@ -14,17 +15,23 @@ namespace SistemaListaAtividade.Application.Services
             _repositoryUoW = repositoryUoW;
         }
 
-        public async Task<Person> AddPerson(Person person)
+        public async Task<Result<Person>> AddPerson(Person person)
         {
             using var transaction = _repositoryUoW.BeginTransaction();
             try
             {
+                var isValidPerson = await IsValidPersonRequest(person);
+                
+                if (!isValidPerson.Success)
+                    return Result<Person>.Error(isValidPerson.Message);
+
                 person.ModificationDate = DateTime.UtcNow;
                 var result = await _repositoryUoW.PersonRepository.AddPersonAsync(person);
 
                 await _repositoryUoW.SaveAsync();
                 await transaction.CommitAsync();
-                return result;
+
+                return Result<Person>.Ok();
             }
             catch (Exception ex)
             {
@@ -141,6 +148,19 @@ namespace SistemaListaAtividade.Application.Services
             {
                 transaction.Dispose();
             }
+        }
+
+        private async Task<Result<Person>> IsValidPersonRequest(Person person)
+        {
+            var requestValidator = await new PersonRequestValidator().ValidateAsync(person);
+            if (!requestValidator.IsValid)
+            {
+                string errorMessage = string.Join(" ", requestValidator.Errors.Select(e => e.ErrorMessage));
+                errorMessage = errorMessage.Replace(Environment.NewLine, "");
+                return Result<Person>.Error(errorMessage);
+            }
+
+            return Result<Person>.Ok();
         }
     }
 }

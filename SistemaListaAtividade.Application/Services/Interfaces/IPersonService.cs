@@ -5,7 +5,7 @@ namespace SistemaListaAtividade.Application.Services.Interfaces
 {
     public interface IPersonService
     {
-        Task<Person> AddPerson(Person person);
+        Task<Result<Person>> AddPerson(Person person);
         Task<Person> UpdatePerson(PersonDto personDto);
         Task DeletePersonAsync(int personId);
         Task<List<Person>> GetAllPersons();

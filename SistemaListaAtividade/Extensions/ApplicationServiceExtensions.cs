@@ -3,6 +3,7 @@ using Microsoft.OpenApi.Models;
 using SistemaListaAtividade.Application.Services.General;
 using SistemaListaAtividade.Persistence.Connections;
 using SistemaListaAtividade.Persistence.Repository.General;
+using System.Text.Json.Serialization;
 
 namespace SistemaListaAtividade.Extensions
 {
@@ -36,6 +37,12 @@ namespace SistemaListaAtividade.Extensions
 
             services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
             services.AddScoped<IRepositoryUoW, RepositoryUoW>();
+
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.DefaultIgnoreCondition
+                                   = JsonIgnoreCondition.WhenWritingNull;
+            });
 
             return services;
         }

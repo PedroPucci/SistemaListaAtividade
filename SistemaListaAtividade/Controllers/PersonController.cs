@@ -22,7 +22,7 @@ namespace SistemaListaAtividade.Controllers
         public async Task<IActionResult> AddPerson([FromBody] Person person)
         {
             var result = await _serviceUoW.PersonService.AddPerson(person);
-            return Ok(result);
+            return result.Success ? Ok(result) : BadRequest(result);
         }
 
         [HttpPut]
