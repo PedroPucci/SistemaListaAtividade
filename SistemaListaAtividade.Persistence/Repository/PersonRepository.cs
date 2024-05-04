@@ -20,13 +20,13 @@ namespace SistemaListaAtividade.Persistence.Repository
             return result.Entity;
         }
 
-        public Person UpdatePerson(Person person)
+        public Person UpdatePersonAsync(Person person)
         {
             var response = _context.Person.Update(person);
             return response.Entity;
         }
 
-        public Person DeletePerson(Person personToDelete)
+        public Person DeletePersonAsync(Person personToDelete)
         {
             _context.Practice.RemoveRange(personToDelete.Practices);
             var response = _context.Person.Remove(personToDelete);

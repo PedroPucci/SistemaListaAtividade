@@ -20,13 +20,13 @@ namespace SistemaListaAtividade.Persistence.Repository
             return result.Entity;
         }
 
-        public Practice DeletePractice(Practice practiceToDelete)
+        public Practice DeletePracticeAsync(Practice practiceToDelete)
         {
             var response = _context.Practice.Remove(practiceToDelete);
             return response.Entity;
         }
 
-        public Practice UpdatePractice(Practice practice)
+        public Practice UpdatePracticeAsync(Practice practice)
         {
             var response = _context.Practice.Update(practice);
             return response.Entity;

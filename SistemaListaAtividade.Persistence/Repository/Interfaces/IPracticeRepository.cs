@@ -5,8 +5,8 @@ namespace SistemaListaAtividade.Persistence.Repository.Interfaces
     public interface IPracticeRepository
     {
         Task<Practice> AddPracticeAsync(Practice practice);
-        Practice UpdatePractice(Practice practice);
-        Practice DeletePractice(Practice practiceToDelete);
+        Practice UpdatePracticeAsync(Practice practice);
+        Practice DeletePracticeAsync(Practice practiceToDelete);
         Task<List<Practice>> GetAllPracticesAsync();
         Task<Practice> GetPracticeByIdAsync(int? id);
         Task<Practice> GetPracticeByNameAsync(string? name);

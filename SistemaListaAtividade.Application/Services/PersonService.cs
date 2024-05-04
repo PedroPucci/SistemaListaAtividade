@@ -52,7 +52,7 @@ namespace SistemaListaAtividade.Application.Services
                 personByName.Email = personDto.Email;
                 personByName.ModificationDate = DateTime.UtcNow;
 
-                var result = _repositoryUoW.PersonRepository.UpdatePerson(personByName);
+                var result = _repositoryUoW.PersonRepository.UpdatePersonAsync(personByName);
 
                 await _repositoryUoW.SaveAsync();
                 await transaction.CommitAsync();
@@ -76,7 +76,7 @@ namespace SistemaListaAtividade.Application.Services
             if (personToDelete == null)
                 throw new ArgumentException("Person not found with the given ID.");
 
-            _repositoryUoW.PersonRepository.DeletePerson(personToDelete);
+            _repositoryUoW.PersonRepository.DeletePersonAsync(personToDelete);
             await _repositoryUoW.SaveAsync();
         }
 
