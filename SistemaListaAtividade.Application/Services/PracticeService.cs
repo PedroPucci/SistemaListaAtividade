@@ -1,6 +1,8 @@
 ﻿using SistemaListaAtividade.Application.Services.Interfaces;
 using SistemaListaAtividade.Domain.Entities;
+using SistemaListaAtividade.Domain.Validator;
 using SistemaListaAtividade.Persistence.Repository.General;
+using System;
 
 namespace SistemaListaAtividade.Application.Services
 {
@@ -13,17 +15,22 @@ namespace SistemaListaAtividade.Application.Services
             _repositoryUoW = repositoryUoW;
         }
 
-        public async Task<Practice> AddPractice(Practice practice)
+        public async Task<Result<Practice>> AddPractice(Practice practice)
         {
             using var transaction = _repositoryUoW.BeginTransaction();
             try
             {
+                var isValidPractice = await IsValidPracticeRequest(practice);
+
+                if (!isValidPractice.Success)
+                    return Result<Practice>.Error(isValidPractice.Message);
+
                 practice.ModificationDate = DateTime.UtcNow;
                 var result = await _repositoryUoW.PracticeRepository.AddPracticeAsync(practice);
 
                 await _repositoryUoW.SaveAsync();
                 await transaction.CommitAsync();
-                return result;
+                return Result<Practice>.Ok();
             }
             catch (Exception ex)
             {
@@ -137,6 +144,19 @@ namespace SistemaListaAtividade.Application.Services
             {
                 transaction.Dispose();
             }
+        }
+
+        private async Task<Result<Practice>> IsValidPracticeRequest(Practice practice)
+        {
+            var requestValidator = await new PracticeRequestValidator().ValidateAsync(practice);
+            if (!requestValidator.IsValid)
+            {
+                string errorMessage = string.Join(" ", requestValidator.Errors.Select(e => e.ErrorMessage));
+                errorMessage = errorMessage.Replace(Environment.NewLine, "");
+                return Result<Practice>.Error(errorMessage);
+            }
+
+            return Result<Practice>.Ok();
         }
     }
 }

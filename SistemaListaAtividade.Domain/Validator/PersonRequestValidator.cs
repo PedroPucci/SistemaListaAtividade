@@ -16,6 +16,10 @@ namespace SistemaListaAtividade.Domain.Validator
             RuleFor(p => p.Email)
                 .NotEmpty()
                 .WithMessage(PersonErrors.Person_Error_EmailCanNotBeNullOrEmpty.Description());
+
+            RuleFor(p => p.Email)
+                .ValidEmail()
+                .WithMessage(PersonErrors.Person_Error_EmailInvalid.Description());
         }
     }
 }

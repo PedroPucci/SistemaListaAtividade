@@ -22,7 +22,7 @@ namespace SistemaListaAtividade.Controllers
         public async Task<IActionResult> AddPractice([FromBody] Practice practice)
         {
             var result = await _serviceUoW.PracticeService.AddPractice(practice);
-            return Ok(result);
+            return result.Success ? Ok(result) : BadRequest(result);
         }
 
         [HttpPut]

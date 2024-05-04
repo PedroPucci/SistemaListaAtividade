@@ -9,5 +9,8 @@ namespace SistemaListaAtividade.Domain.Enums.Errors
 
         [Description("'Email' can not be null or empty!")]
         Person_Error_EmailCanNotBeNullOrEmpty,
+
+        [Description("'Email' invalid!")]
+        Person_Error_EmailInvalid
     }
 }
