@@ -1,2 +1,0 @@
-2024-05-04 17:32:29.737 -03:00 [ERR] Mensagem de erro
-2024-05-04 17:35:18.403 -03:00 [ERR] Mensagem de erro: Campos invalidos para a entidade Person

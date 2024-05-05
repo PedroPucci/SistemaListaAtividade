@@ -11,11 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 
-builder.Host.UseSerilog((ctx, lc) => lc
-    .WriteTo.Console(LogEventLevel.Debug)
-    .WriteTo.File("log.txt",
-        LogEventLevel.Warning,
-        rollingInterval: RollingInterval.Day));
+// Inicialize o logger Serilog
+LogExtension.InitializeLogger();
+
+// Obtenha o logger configurado
+var loggerSerialLog = LogExtension.GetLogger();
+
+// Use o logger...
+loggerSerialLog.Information("Logging initialized.");
 
 var app = builder.Build();
 
