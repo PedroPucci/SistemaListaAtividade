@@ -1,8 +1,8 @@
 ﻿using Serilog;
 using SistemaListaAtividade.Application.Services.Interfaces;
 using SistemaListaAtividade.Domain.Entities;
-using SistemaListaAtividade.Domain.Validator;
 using SistemaListaAtividade.Persistence.Repository.General;
+using SistemaListaAtividade.Shared.Validator.ValidatorPractice;
 
 namespace SistemaListaAtividade.Application.Services
 {
@@ -26,8 +26,7 @@ namespace SistemaListaAtividade.Application.Services
                 {
                     Log.Error("Message: Error invalid inputs");
                     return Result<Practice>.Error(isValidPractice.Message);
-                }
-                    
+                }                    
 
                 practice.ModificationDate = DateTime.UtcNow;
                 var result = await _repositoryUoW.PracticeRepository.AddPracticeAsync(practice);

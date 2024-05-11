@@ -27,10 +27,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemaListaAtividade.Tests
 		{0CA06F43-B497-4E63-8A7C-11DA2D213F04} = {0CA06F43-B497-4E63-8A7C-11DA2D213F04}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaListaAtividade.Shared", "SistemaListaAtividade.Shared\SistemaListaAtividade.Shared.csproj", "{7D8A10C5-C6F2-4D07-A176-E3C8CDCFB567}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemaListaAtividade.Shared", "SistemaListaAtividade.Shared\SistemaListaAtividade.Shared.csproj", "{7D8A10C5-C6F2-4D07-A176-E3C8CDCFB567}"
 	ProjectSection(ProjectDependencies) = postProject
 		{66EC7467-CA9C-4053-8F7C-2A6A99FF4120} = {66EC7467-CA9C-4053-8F7C-2A6A99FF4120}
 		{FE3818BE-977D-4251-AD3B-593E1AD43842} = {FE3818BE-977D-4251-AD3B-593E1AD43842}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{16FD9986-7CDA-4331-A181-FBAF53567DB2}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global

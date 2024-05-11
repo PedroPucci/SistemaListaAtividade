@@ -2,8 +2,8 @@
 using SistemaListaAtividade.Application.Services.Interfaces;
 using SistemaListaAtividade.Domain.Entities;
 using SistemaListaAtividade.Domain.Entities.Dto;
-using SistemaListaAtividade.Domain.Validator;
 using SistemaListaAtividade.Persistence.Repository.General;
+using SistemaListaAtividade.Shared.Validator.ValidatorPerson;
 
 namespace SistemaListaAtividade.Application.Services
 {
