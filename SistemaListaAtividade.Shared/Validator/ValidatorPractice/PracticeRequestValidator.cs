@@ -3,7 +3,7 @@ using SistemaListaAtividade.Domain.Entities;
 using SistemaListaAtividade.Domain.Enums.Errors;
 using SistemaListaAtividade.Domain.Helpers;
 
-namespace SistemaListaAtividade.Domain.Validator
+namespace SistemaListaAtividade.Shared.Validator.ValidatorPractice
 {
     public class PracticeRequestValidator : AbstractValidator<Practice>
     {
@@ -15,7 +15,7 @@ namespace SistemaListaAtividade.Domain.Validator
 
             RuleFor(p => p.Description)
                 .NotEmpty()
-                .WithMessage(PracticeErrors.Practice_Error_DescriptionCanNotBeNullOrEmpty.Description());            
+                .WithMessage(PracticeErrors.Practice_Error_DescriptionCanNotBeNullOrEmpty.Description());
         }
     }
 }

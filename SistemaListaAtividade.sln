@@ -22,9 +22,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemaListaAtividade.Persi
 		{FE3818BE-977D-4251-AD3B-593E1AD43842} = {FE3818BE-977D-4251-AD3B-593E1AD43842}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaListaAtividade.Tests", "SistemaListaAtividade.Tests\SistemaListaAtividade.Tests.csproj", "{FF0BE2A3-1A21-4909-A529-4647471D5424}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemaListaAtividade.Tests", "SistemaListaAtividade.Tests\SistemaListaAtividade.Tests.csproj", "{FF0BE2A3-1A21-4909-A529-4647471D5424}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0CA06F43-B497-4E63-8A7C-11DA2D213F04} = {0CA06F43-B497-4E63-8A7C-11DA2D213F04}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaListaAtividade.Shared", "SistemaListaAtividade.Shared\SistemaListaAtividade.Shared.csproj", "{7D8A10C5-C6F2-4D07-A176-E3C8CDCFB567}"
+	ProjectSection(ProjectDependencies) = postProject
+		{66EC7467-CA9C-4053-8F7C-2A6A99FF4120} = {66EC7467-CA9C-4053-8F7C-2A6A99FF4120}
+		{FE3818BE-977D-4251-AD3B-593E1AD43842} = {FE3818BE-977D-4251-AD3B-593E1AD43842}
 	EndProjectSection
 EndProject
 Global
@@ -53,6 +59,10 @@ Global
 		{FF0BE2A3-1A21-4909-A529-4647471D5424}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF0BE2A3-1A21-4909-A529-4647471D5424}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF0BE2A3-1A21-4909-A529-4647471D5424}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D8A10C5-C6F2-4D07-A176-E3C8CDCFB567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D8A10C5-C6F2-4D07-A176-E3C8CDCFB567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D8A10C5-C6F2-4D07-A176-E3C8CDCFB567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D8A10C5-C6F2-4D07-A176-E3C8CDCFB567}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

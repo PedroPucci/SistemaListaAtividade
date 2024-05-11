@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using System.Text.RegularExpressions;
 
-namespace SistemaListaAtividade.Domain.Validator
+namespace SistemaListaAtividade.Shared.Validator.General
 {
     public static class ValidatorsUtils
     {

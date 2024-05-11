@@ -27,6 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SistemaListaAtividade.Domain\SistemaListaAtividade.Domain.csproj" />
     <ProjectReference Include="..\SistemaListaAtividade.Persistence\SistemaListaAtividade.Persistence.csproj" />
+    <ProjectReference Include="..\SistemaListaAtividade.Shared\SistemaListaAtividade.Shared.csproj" />
   </ItemGroup>
 
 </Project>

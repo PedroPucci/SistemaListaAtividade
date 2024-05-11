@@ -25,7 +25,7 @@ namespace SistemaListaAtividade.Application.Services
                 
                 if (!isValidPerson.Success)
                 {
-                    Log.Error("Mensagem de erro: Campos invalidos para a entidade Person");
+                    Log.Error("Message: Invalid inputs to Person");
                     return Result<Person>.Error(isValidPerson.Message);
                 }                
 
@@ -39,8 +39,9 @@ namespace SistemaListaAtividade.Application.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Message: Error to add a new Person " + ex + "");
                 transaction.Rollback();
-                throw new InvalidOperationException("An error occurred while adding the Person! " + ex + "");
+                throw new InvalidOperationException("An error occurred");
             }
             finally
             {
@@ -57,8 +58,11 @@ namespace SistemaListaAtividade.Application.Services
 
                 Person personByName = await _repositoryUoW.PersonRepository.GetPersonByNameAsync(personName);
 
-                if (personName == null)
+                if (personName is null)
+                {
+                    Log.Error("Message: Error to update to Person");
                     throw new InvalidOperationException("Person does not found!");
+                }                    
 
                 personByName.Email = personDto.Email;
                 personByName.ModificationDate = DateTime.UtcNow;
@@ -71,8 +75,9 @@ namespace SistemaListaAtividade.Application.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Message: Error to update a Person " + ex + "");
                 transaction.Rollback();
-                throw new InvalidOperationException("An error occurred while updating the Person! " + ex + "");
+                throw new InvalidOperationException("An error occurred");
             }
             finally
             {
@@ -88,7 +93,10 @@ namespace SistemaListaAtividade.Application.Services
                 var personToDelete = await _repositoryUoW.PersonRepository.GetPersonByIdAsync(personId);
 
                 if (personToDelete == null)
+                {
+                    Log.Error("Message: Error to delete to Person");
                     throw new ArgumentException("Person not found with the given ID.");
+                }                    
 
                 _repositoryUoW.PersonRepository.DeletePersonAsync(personToDelete);
                 await _repositoryUoW.SaveAsync();
@@ -96,8 +104,9 @@ namespace SistemaListaAtividade.Application.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Message: Error to delete a Person " + ex + "");
                 transaction.Rollback();
-                throw new InvalidOperationException("An error occurred while removing the Person! " + ex + "");
+                throw new InvalidOperationException("An error occurred");
             }
             finally
             {
@@ -116,8 +125,9 @@ namespace SistemaListaAtividade.Application.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Message: Error to loading the list Person " + ex + "");
                 transaction.Rollback();
-                throw new InvalidOperationException("There was an error loading persons! " + ex + "");
+                throw new InvalidOperationException("An error occurred");
             }
             finally
             {
@@ -131,22 +141,29 @@ namespace SistemaListaAtividade.Application.Services
             try
             {
                 if (string.IsNullOrEmpty(name))
+                {
+                    Log.Error("Name can not be empty or null!");
                     throw new InvalidOperationException("Name can not be empty or null!");
+                }                    
 
                 string newName = char.ToUpper(name[0]) + name.Substring(1);
 
                 Person person = await _repositoryUoW.PersonRepository.GetPersonByNameAsync(newName);
 
                 if (person == null)
+                {
+                    Log.Error("Message: Error to load the Person");
                     throw new InvalidOperationException("Person not found!");
+                }                    
 
                 _repositoryUoW.Commit();
                 return person;
             }
             catch (Exception ex)
             {
+                Log.Error("Message: Error to loading the list Person " + ex + "");
                 transaction.Rollback();
-                throw new InvalidOperationException("There was an error loading person! " + ex + "");
+                throw new InvalidOperationException("An error occurred");
             }
             finally
             {

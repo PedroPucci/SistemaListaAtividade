@@ -1,8 +1,8 @@
-﻿using SistemaListaAtividade.Application.Services.Interfaces;
+﻿using Serilog;
+using SistemaListaAtividade.Application.Services.Interfaces;
 using SistemaListaAtividade.Domain.Entities;
 using SistemaListaAtividade.Domain.Validator;
 using SistemaListaAtividade.Persistence.Repository.General;
-using System;
 
 namespace SistemaListaAtividade.Application.Services
 {
@@ -23,7 +23,11 @@ namespace SistemaListaAtividade.Application.Services
                 var isValidPractice = await IsValidPracticeRequest(practice);
 
                 if (!isValidPractice.Success)
+                {
+                    Log.Error("Message: Error invalid inputs");
                     return Result<Practice>.Error(isValidPractice.Message);
+                }
+                    
 
                 practice.ModificationDate = DateTime.UtcNow;
                 var result = await _repositoryUoW.PracticeRepository.AddPracticeAsync(practice);
@@ -34,8 +38,9 @@ namespace SistemaListaAtividade.Application.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Message: Error to add a new Practice " + ex + "");
                 transaction.Rollback();
-                throw new InvalidOperationException("An error occurred while adding the Practice! " + ex + "");
+                throw new InvalidOperationException("An error occurred");
             }
             finally
             {
@@ -51,7 +56,10 @@ namespace SistemaListaAtividade.Application.Services
                 Practice practiceByName = await _repositoryUoW.PracticeRepository.GetPracticeByNameAsync(practice.Name);
 
                 if (practiceByName == null)
+                {
+                    Log.Error("Message: Practice does not found!");
                     throw new InvalidOperationException("Practice does not found!");
+                }                   
 
                 practiceByName.Description = practice.Description;
                 practiceByName.Type = practice.Type;
@@ -65,8 +73,9 @@ namespace SistemaListaAtividade.Application.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Message: Error to updating a Practice " + ex + "");
                 transaction.Rollback();
-                throw new InvalidOperationException("An error occurred while updating the Practice! " + ex + "");
+                throw new InvalidOperationException("An error occurred");
             }
             finally
             {
@@ -82,7 +91,10 @@ namespace SistemaListaAtividade.Application.Services
                 var practiceToDelete = await _repositoryUoW.PracticeRepository.GetPracticeByIdAsync(practiceId);
 
                 if (practiceToDelete == null)
+                {
+                    Log.Error("Practice not found with the given ID.");
                     throw new ArgumentException("Practice not found with the given ID.");
+                }                    
 
                 _repositoryUoW.PracticeRepository.DeletePracticeAsync(practiceToDelete);
                 await _repositoryUoW.SaveAsync();
@@ -90,8 +102,9 @@ namespace SistemaListaAtividade.Application.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Message: Error to delete a Practice " + ex + "");
                 transaction.Rollback();
-                throw new InvalidOperationException("An error occurred while removing the Practice! " + ex + "");
+                throw new InvalidOperationException("An error occurred");
             }
             finally
             {
@@ -110,8 +123,9 @@ namespace SistemaListaAtividade.Application.Services
             }
             catch (Exception ex)
             {
+                Log.Error("Message: Error to loading the list Practice " + ex + "");
                 transaction.Rollback();
-                throw new InvalidOperationException("An error occurred while loading the Practices! " + ex + "");
+                throw new InvalidOperationException("An error occurred");
             }
             finally
             {
@@ -125,20 +139,27 @@ namespace SistemaListaAtividade.Application.Services
             try
             {
                 if (string.IsNullOrEmpty(name))
+                {
+                    Log.Error("Name can not be empty or null!");
                     throw new InvalidOperationException("Name can not be empty or null!");
+                }                    
                 
                 Practice practice = await _repositoryUoW.PracticeRepository.GetPracticeByNameAsync(name);
 
-                if (practice == null)
+                if (practice is null)
+                {
+                    Log.Error("Practice not found!");
                     throw new InvalidOperationException("Practice not found!");
+                }                    
 
                 _repositoryUoW.Commit();
                 return practice;
             }
             catch (Exception ex)
             {
+                Log.Error("Message: Error to loading a Practice " + ex + "");
                 transaction.Rollback();
-                throw new InvalidOperationException("An error occurred while loading the Practice! " + ex + "");
+                throw new InvalidOperationException("An error occurred");
             }
             finally
             {
